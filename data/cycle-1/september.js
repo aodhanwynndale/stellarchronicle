@@ -476,7 +476,7 @@ const septemberStudents = [
 
         y:
             122
-    },
+    }
 
 ];
 
@@ -541,6 +541,6 @@ const septemberLines = [
     "Kawakubo Shinji"
 ],
 
-    ],
+    ]
 
 ];
