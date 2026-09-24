@@ -4374,13 +4374,15 @@ function drawConstellation() {
     hideProfile();
 
 
-    const monthStudents =
+const studentsByMonth = {
+    June: juneStudents,
+    July: julyStudents,
+    August: augustStudents,
+    September: septemberStudents
+};
 
-        students.filter(
-            student =>
-                student.month ===
-                currentMonth
-        );
+const monthStudents =
+    studentsByMonth[currentMonth] || [];
 
 
     const studentMap =
@@ -5639,6 +5641,9 @@ updateCycle();
 </script>
 
 <script src="data/cycle-1/june.js"></script>
+<script src="data/cycle-1/july.js"></script>
+<script src="data/cycle-1/august.js"></script>
+<script src="data/cycle-1/september.js"></script>
 
 </body>
 
