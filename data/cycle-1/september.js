@@ -541,6 +541,4 @@ const septemberLines = [
     "Kawakubo Shinji"
 ],
 
-    ]
-
 ];
