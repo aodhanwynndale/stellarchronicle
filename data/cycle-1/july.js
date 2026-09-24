@@ -315,5 +315,4 @@ const julyLines = [
     "Ryusarion Sinclair"
 ],
 
-    ],
 ];
