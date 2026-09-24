@@ -479,6 +479,4 @@ const augustLines = [
     "Lichelyn Mielle"
 ],
 
-
-    ],
   ];
