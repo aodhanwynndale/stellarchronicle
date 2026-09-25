@@ -16,7 +16,7 @@ const augustStudents = [
             "5025 · @spikemoth",
 
         photo:
-            "images/richard.jpg",
+            "images/cycle-1/richard.jpg",
 
         quote:
             "",
@@ -46,7 +46,7 @@ const augustStudents = [
             "2008 · @obscendio",
 
         photo:
-            "images/vangelyn.jpg",
+            "images/cycle-1/vangelyn.jpg",
 
         quote:
             "",
@@ -76,7 +76,7 @@ const augustStudents = [
             "5024 · @lunefleuir",
 
         photo:
-            "images/mireilisse.jpg",
+            "images/cycle-1/mireilisse.jpg",
 
         quote:
             "",
@@ -106,7 +106,7 @@ const augustStudents = [
             "5015 · @lanternsdim",
 
         photo:
-            "images/vaelric.jpg",
+            "images/cycle-1/vaelric.jpg",
 
         quote:
             "",
