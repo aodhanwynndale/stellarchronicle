@@ -3851,35 +3851,10 @@ function updateMonthTitle() {
 
     /* Tetap update tulisan kecil di pojok map */
 
-    if (
-        currentMonth ===
-        "June"
-    ) {
+    const cycle = cycles[currentCycle];
 
-        mapMonthTitle.textContent =
-            "Ursa Minor";
-	} else if (
-    currentMonth === "July"
-) {
-    mapMonthTitle.textContent =
-        "Apus";
-	} else if (
-    currentMonth === "August"
-) {
-    mapMonthTitle.textContent =
-        "Aquila";
-	} else if (
-    currentMonth === "September"
-) {
-    mapMonthTitle.textContent =
-        "Cygnus";
-
-    } else {
-
-        mapMonthTitle.textContent =
-            currentMonth;
-
-    }
+mapMonthTitle.textContent =
+    cycle.constellations[currentMonth] || currentMonth;
 
 }
 
