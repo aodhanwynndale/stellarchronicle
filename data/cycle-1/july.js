@@ -16,7 +16,7 @@ const julyStudents = [
             "2022 · @arcxaeden_",
 
         photo:
-            "images/ryusarion.jpg",
+            "images/cycle-1/ryusarion.jpg",
 
         quote:
             "",
@@ -46,7 +46,7 @@ const julyStudents = [
             "5024 · @lunefleuir",
 
         photo:
-            "images/mireilisse.jpg",
+            "images/cycle-1/mireilisse.jpg",
 
         quote:
             "",
