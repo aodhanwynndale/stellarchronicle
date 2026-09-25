@@ -16,7 +16,7 @@ const juneStudents = [
             "4022 · @poetiacs",
 
         photo:
-            "images/nicholette.jpg",
+            "images/cycle-1/nicholette.jpg",
 
         quote:
             "A brilliant northern light.",
@@ -46,7 +46,7 @@ const juneStudents = [
             "4026 · @crackstne",
 
         photo:
-            "images/naja.jpg",
+            "images/cycle-1/naja.jpg",
 
         quote:
             "A warm guardian of the northern bowl.",
@@ -76,7 +76,7 @@ const juneStudents = [
             "5003 · @hatchscape",
 
         photo:
-            "images/kasper.jpg",
+            "images/cycle-1/kasper.jpg",
 
         quote:
             "A vivid point along the Little Dipper.",
