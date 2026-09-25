@@ -16,7 +16,7 @@ const septemberStudents = [
             "5015 · @fireswither",
 
         photo:
-            "images/vaelric.jpg",
+            "images/cycle-1/vaelric.jpg",
 
         quote:
             "",
@@ -46,7 +46,7 @@ const septemberStudents = [
             "5041 · @Havenstoria",
 
         photo:
-            "images/vivienne.jpg",
+            "images/cycle-1/vivienne.jpg",
 
         quote:
             "",
@@ -76,7 +76,7 @@ const septemberStudents = [
             "5025 · @spikemoth",
 
         photo:
-            "images/serica.jpg",
+            "images/cycle-1/serica.jpg",
 
         quote:
             "",
