@@ -11,7 +11,7 @@
 >
 
 <title>
-    The Stellar Chronicle
+    The Celestial Archive
 </title>
 
 
@@ -1368,16 +1368,14 @@ svg {
             22px 12px 30px;
     }
 
-   .month-tabs {
-    width: min(100%, 94vw);
-    gap: 4px;
-}
+    .month-tab {
 
-.month-tab {
-    padding: 6px 9px;
-    font-size: 8px;
-    letter-spacing: 1.5px;
-}
+        padding:
+            6px 9px;
+
+        font-size:
+            8px;
+    }
 
     .star-profile {
 
@@ -1411,6 +1409,20 @@ svg {
     text-transform: uppercase;
 }
 
+
+@media(max-width:650px) {
+    .month-tabs {
+        width: min(100%, 94vw);
+        gap: 4px;
+    }
+
+    .month-tab {
+        padding: 6px 9px;
+        font-size: 8px;
+        letter-spacing: 1.5px;
+    }
+}
+
 </style>
 
 </head>
@@ -1427,9 +1439,8 @@ svg {
 ===================================================== -->
 
 <header>
-
-    <h1>
-        THE STELLAR CHRONICLE
+<h1>
+        THE CELESTIAL ARCHIVE
     </h1>
 
     <div class="subtitle">
@@ -1457,7 +1468,7 @@ svg {
     <div class="cycle-title">
 
         <strong id="cycle-name">
-            CYCLE I
+            CELESTIAL CYCLE I
         </strong>
 
         <span id="cycle-date">
@@ -1755,10 +1766,16 @@ svg {
 
 </div>
 
+
+<!-- =====================================================
+     MONTH DATA
+===================================================== -->
+
 <script src="data/cycle-1/june.js"></script>
 <script src="data/cycle-1/july.js"></script>
 <script src="data/cycle-1/august.js"></script>
 <script src="data/cycle-1/september.js"></script>
+
 
 <script>
 
@@ -1772,7 +1789,7 @@ const cycles = [
     {
 
         name:
-            "CYCLE I",
+            "CELESTIAL CYCLE I",
 
         date:
             "June — November 2026",
@@ -1798,1527 +1815,78 @@ let currentCycle =
 
 
 let currentMonth =
-    "September";
+    "June";
 
 
 /* =====================================================
-   STUDENTS
+   EXTERNAL ARCHIVE DATA
 ===================================================== */
 
-const students = [
+const studentsByMonth = {
 
-    {
-        name:
-            "Nicholette Rhodes",
+    June:
+        typeof juneStudents !== "undefined"
+            ? juneStudents : [],
 
-        month:
-            "June",
+    July:
+        typeof julyStudents !== "undefined"
+            ? julyStudents : [],
 
-        rank:
-            1,
+    August:
+        typeof augustStudents !== "undefined"
+            ? augustStudents : [],
 
-        type:
-            "BLUE",
+    September:
+        typeof septemberStudents !== "undefined"
+            ? septemberStudents : [],
 
-        identity:
-            "4022 · @poetiacs",
+    October:
+        typeof octoberStudents !== "undefined"
+            ? octoberStudents : [],
 
-        photo:
-            "images/nicholette.jpg",
+    November:
+        typeof novemberStudents !== "undefined"
+            ? novemberStudents : []
 
-        quote:
-            "A brilliant northern light.",
+};
 
-        x:
-            685,
 
-        y:
-            163
-    },
+const constellationLines = {
 
+    June:
+        typeof juneLines !== "undefined"
+            ? juneLines : [],
 
-    {
-        name:
-            "Naja Kusunoki",
+    July:
+        typeof julyLines !== "undefined"
+            ? julyLines : [],
 
-        month:
-            "June",
+    August:
+        typeof augustLines !== "undefined"
+            ? augustLines : [],
 
-        rank:
-            2,
+    September:
+        typeof septemberLines !== "undefined"
+            ? septemberLines : [],
 
-        type:
-            "ORANGE",
+    October:
+        typeof octoberLines !== "undefined"
+            ? octoberLines : [],
 
-        identity:
-            "4026 · @crackstne",
+    November:
+        typeof novemberLines !== "undefined"
+            ? novemberLines : []
 
-        photo:
-            "images/naja.jpg",
+};
 
-        quote:
-            "A warm guardian of the northern bowl.",
 
-        x:
-            361,
+function getAllStudents() {
 
-        y:
-            264
-    },
+    return Object.values(
+        studentsByMonth
+    ).flat();
 
-
-    {
-        name:
-            "Kasper Goth",
-
-        month:
-            "June",
-
-        rank:
-            3,
-
-        type:
-            "RED",
-
-        identity:
-            "5003 · @hatchscape",
-
-        photo:
-            "images/kasper.jpg",
-
-        quote:
-            "A vivid point along the Little Dipper.",
-
-        x:
-            415,
-
-        y:
-            289
-    },
-
-
-    {
-        name:
-            "Mireilisse de Castellane",
-
-        month:
-            "June",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "5024 · @lluminea",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            597,
-
-        y:
-            169
-    },
-
-
-    {
-        name:
-            "Desirée Hope",
-
-        month:
-            "June",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "2003 · @dolceir",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            504,
-
-        y:
-            201
-    },
-
-
-    {
-        name:
-            "Ryusarion Sinclair",
-
-        month:
-            "June",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "2022 · @arcxaeden_",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            312,
-
-        y:
-            378
-    },
-
-
-    {
-        name:
-            "Seraphina Marsh",
-
-        month:
-            "June",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "4029 · @eufroosine",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            388,
-
-        y:
-            398
-    },
-
-
-    {
-        name:
-            "Vivienne-Aurélie Vestergaard",
-
-        month:
-            "June",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "5041 · @mirthinlace",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            633,
-
-        y:
-            296
-    },
-
-
-    {
-        name:
-            "Clèa Reese",
-
-        month:
-            "June",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6007 · @clealaire",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            469,
-
-        y:
-            459
-    },
-
-
-    {
-        name:
-            "Magnolia Daisy",
-
-        month:
-            "June",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "5028 · @insolcent",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            386,
-
-        y:
-            134
-    },
-
-
-    /* =====================================================
-       JULY
-    ===================================================== */
-
-    {
-        name:
-            "Ryusarion Sinclair",
-
-        month:
-            "July",
-
-        rank:
-            1,
-
-        type:
-            "BLUE",
-
-        identity:
-            "2022 · @arcxaeden_",
-
-        photo:
-            "images/ryusarion.jpg",
-
-        quote:
-            "",
-
-        x:
-            789,
-
-        y:
-            340
-    },
-
-
-    {
-        name:
-            "Mireilisse de Castellane",
-
-        month:
-            "July",
-
-        rank:
-            2,
-
-        type:
-            "ORANGE",
-
-        identity:
-            "5024 · @lunefleuir",
-
-        photo:
-            "images/mireilisse.jpg",
-
-        quote:
-            "",
-
-        x:
-            302,
-
-        y:
-            296
-    },
-
-
-    {
-        name:
-            "Naja Kusunoki",
-
-        month:
-            "July",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "4026 · @crackstne",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            382,
-
-        y:
-            261
-    },
-
-
-    {
-        name:
-            "Seraphina Marsh",
-
-        month:
-            "July",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "4029 · @etreveire",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            222,
-
-        y:
-            173
-    },
-
-
-    {
-        name:
-            "Soleil Nocturne",
-
-        month:
-            "July",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "2002 · @slIaughter",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            367,
-
-        y:
-            96
-    },
-
-
-    {
-        name:
-            "Vangelyn Bloom",
-
-        month:
-            "July",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "2008 · @obscendio",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            541,
-
-        y:
-            403
-    },
-
-
-    {
-        name:
-            "Zachary Goth",
-
-        month:
-            "July",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "2023 · @adzachtive",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            533,
-
-        y:
-            186
-    },
-
-
-    {
-        name:
-            "Catriona Morvane",
-
-        month:
-            "July",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6006 · @lilrevernel",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            336,
-
-        y:
-            405
-    },
-
-
-    {
-        name:
-            "Lichelyn Mielle",
-
-        month:
-            "July",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6029 · @itsxmiel",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            697,
-
-        y:
-            450
-    },
-
-
-    {
-        name:
-            "Desirée Hope",
-
-        month:
-            "July",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "2003 · @dolceir",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            742,
-
-        y:
-            229
-    },
-
-
-    /* =====================================================
-       AUGUST
-    ===================================================== */
-
-    {
-        name:
-            "Richard Redmayne",
-
-        month:
-            "August",
-
-        rank:
-            1,
-
-        type:
-            "BLUE",
-
-        identity:
-            "5025 · @spikemoth",
-
-        photo:
-            "images/richard.jpg",
-
-        quote:
-            "",
-
-        x:
-            427,
-
-        y:
-            171
-    },
-
-
-    {
-        name:
-            "Vangelyn Bloom",
-
-        month:
-            "August",
-
-        rank:
-            2,
-
-        type:
-            "ORANGE",
-
-        identity:
-            "2008 · @obscendio",
-
-        photo:
-            "images/vangelyn.jpg",
-
-        quote:
-            "",
-
-        x:
-            454,
-
-        y:
-            130
-    },
-
-
-    {
-        name:
-            "Mireilisse de Castellane",
-
-        month:
-            "August",
-
-        rank:
-            3,
-
-        type:
-            "RED",
-
-        identity:
-            "5024 · @lunefleuir",
-
-        photo:
-            "images/mireilisse.jpg",
-
-        quote:
-            "",
-
-        x:
-            307,
-
-        y:
-            396
-    },
-
-
-    {
-        name:
-            "Vaelric Night",
-
-        month:
-            "August",
-
-        rank:
-            3,
-
-        type:
-            "RED",
-
-        identity:
-            "5015 · @lanternsdim",
-
-        photo:
-            "images/vaelric.jpg",
-
-        quote:
-            "",
-
-        x:
-            686,
-
-        y:
-            57
-    },
-
-
-    {
-        name:
-            "Maybeth Prince",
-
-        month:
-            "August",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "2019 · @e3vrne",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            572,
-
-        y:
-            302
-    },
-
-
-    {
-        name:
-            "Celestine Zefraind",
-
-        month:
-            "August",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "4013 · @DEATHLYSlNNER",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            687,
-
-        y:
-            496
-    },
-
-
-    {
-        name:
-            "Naja Kusunoki",
-
-        month:
-            "August",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "4026 · @crackstne",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            401,
-
-        y:
-            227
-    },
-
-
-    {
-        name:
-            "Vivienne-Aurélie Vestergaard",
-
-        month:
-            "August",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "5041 · @Mirthinlace",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            421,
-
-        y:
-            351
-    },
-
-
-    {
-        name:
-            "Lichelyn Mielle",
-
-        month:
-            "August",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6029 · @talesoflele",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            724,
-
-        y:
-            23
-    },
-
-
-    {
-        name:
-            "Claude Morvane",
-
-        month:
-            "August",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "2012 · @SonnetOfDusk",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            510,
-
-        y:
-            408
-    },
-
-
-    {
-        name:
-            "Clèa Reese",
-
-        month:
-            "August",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6007 · @ephxmcre",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            719,
-
-        y:
-            510
-    },
-
-
-    {
-        name:
-            "Evanthe Yūtenji",
-
-        month:
-            "August",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6034 · @malsondiev",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            528,
-
-        y:
-            204
-    },
-
-
-    {
-        name:
-            "Ryusarion Sinclair",
-
-        month:
-            "August",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "5022 · @arcxaeden_",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            759,
-
-        y:
-            335
-    },
-
-
-    {
-        name:
-            "Kawakubo Shinji",
-
-        month:
-            "August",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6015 · @cinetsugi",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            659,
-
-        y:
-            270
-    },
-
-
-    /* =====================================================
-       SEPTEMBER
-    ===================================================== */
-
-    {
-        name:
-            "Vaelric Night",
-
-        month:
-            "September",
-
-        rank:
-            1,
-
-        type:
-            "BLUE",
-
-        identity:
-            "5015 · @fireswither",
-
-        photo:
-            "images/vaelric.jpg",
-
-        quote:
-            "",
-
-        x:
-            451,
-
-        y:
-            193
-    },
-
-
-    {
-        name:
-            "Vivienne-Aurélie Vestergaard",
-
-        month:
-            "September",
-
-        rank:
-            2,
-
-        type:
-            "ORANGE",
-
-        identity:
-            "5041 · @Havenstoria",
-
-        photo:
-            "images/vivienne.jpg",
-
-        quote:
-            "",
-
-        x:
-            504,
-
-        y:
-            293
-    },
-
-
-    {
-        name:
-            "Serica Yūtenji",
-
-        month:
-            "September",
-
-        rank:
-            3,
-
-        type:
-            "RED",
-
-        identity:
-            "5025 · @spikemoth",
-
-        photo:
-            "images/serica.jpg",
-
-        quote:
-            "",
-
-        x:
-            398,
-
-        y:
-            438
-    },
-
-
-    {
-        name:
-            "Maybeth Prince",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "2019 · @starlitrd",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            669,
-
-        y:
-            222
-    },
-
-
-    {
-        name:
-            "Kawakubo Shinji",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6015 · @cinetelier",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            750,
-
-        y:
-            542
-    },
-
-
-    {
-        name:
-            "Celestine Zefraind",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "4013 · @puingpatah",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            269,
-
-        y:
-            483
-    },
-
-
-    {
-        name:
-            "Keiranza Birkins",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "5006 · @vourione",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            772,
-
-        y:
-            56
-    },
-
-
-    {
-        name:
-            "Rena Kisaragi",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6034 · @mahoumiru",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            549,
-
-        y:
-            165
-    },
-
-
-    {
-        name:
-            "Claude Morvane",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "2012 · @SonnetOfDusk",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            720,
-
-        y:
-            95
-    },
-
-
-    {
-        name:
-            "Mireilisse de Castellane",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "5024 · @lluminea",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            630,
-
-        y:
-            407
-    },
-
-
-    {
-        name:
-            "Naja Kusunoki",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "4026 · @ethealreals",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            376,
-
-        y:
-            270
-    },
-
-
-    {
-        name:
-            "Clèa Reese",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6007 · @ephxmcre",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            828,
-
-        y:
-            283
-    },
-
-
-    {
-        name:
-            "Kennedict Morvane",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "4037 · @edsanctus",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            222,
-
-        y:
-            287
-    },
-
-
-    {
-        name:
-            "Valentine Night",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "4044 · @VeilOfChamber",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            556,
-
-        y:
-            493
-    },
-
-
-    {
-        name:
-            "Valtherion Night",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6028 · @ItMightEnd",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            469,
-
-        y:
-            78
-    },
-
-
-    {
-        name:
-            "Ryusarion Whitmore",
-
-        month:
-            "September",
-
-        rank:
-            0,
-
-        type:
-            "WHITE",
-
-        identity:
-            "6028 · @arcxaeden_",
-
-        photo:
-            "",
-
-        quote:
-            "",
-
-        x:
-            303,
-
-        y:
-            122
-    }
-
-];
+}
 
 
 /* =====================================================
@@ -3343,204 +1911,6 @@ const stellarColors = {
 
 
 /* =====================================================
-   CONSTELLATION LINES
-===================================================== */
-
-const constellationLines = {
-
-    June: [
-
-        [
-            "Nicholette Rhodes",
-            "Mireilisse de Castellane"
-        ],
-
-        [
-            "Mireilisse de Castellane",
-            "Desirée Hope"
-        ],
-
-        [
-            "Desirée Hope",
-            "Kasper Goth"
-        ],
-
-        [
-            "Kasper Goth",
-            "Naja Kusunoki"
-        ],
-
-        [
-            "Naja Kusunoki",
-            "Ryusarion Sinclair"
-        ],
-
-        [
-            "Ryusarion Sinclair",
-            "Seraphina Marsh"
-        ],
-
-        [
-          "Kasper Goth",
-          "Seraphina Marsh"
-        ]
-
-    ],
-
-
-    July: [
-
-        [
-    "Mireilisse de Castellane",
-    "Seraphina Marsh"
-],
-
-[
-    "Seraphina Marsh",
-    "Naja Kusunoki"
-],
-
-[
-    "Naja Kusunoki",
-    "Ryusarion Sinclair"
-],
-
-    ],
-
-
-    August: [
-
-        [
-    "Clèa Reese",
-    "Celestine Zefraind"
-],
-
-[
-    "Celestine Zefraind",
-    "Maybeth Prince"
-],
-
-[
-    "Celestine Zefraind",
-    "Claude Morvane"
-],
-
-[
-    "Claude Morvane",
-    "Mireilisse de Castellane"
-],
-
-[
-    "Mireilisse de Castellane",
-    "Vivienne-Aurélie Vestergaard"
-],
-
-[
-    "Vivienne-Aurélie Vestergaard",
-    "Maybeth Prince"
-],
-
-[
-    "Maybeth Prince",
-    "Vangelyn Bloom"
-],
-
-[
-    "Vangelyn Bloom",
-    "Richard Redmayne"
-],
-
-[
-    "Richard Redmayne",
-    "Naja Kusunoki"
-],
-
-[
-    "Maybeth Prince",
-    "Vaelric Night"
-],
-
-[
-    "Celestine Zefraind",
-    "Vaelric Night"
-],
-
-[
-    "Vaelric Night",
-    "Lichelyn Mielle"
-],
-
-
-    ],
-
-
-    September: [
-[
-    "Naja Kusunoki",
-    "Celestine Zefraind"
-],
-
-[
-    "Celestine Zefraind",
-    "Serica Yūtenji"
-],
-
-[
-    "Serica Yūtenji",
-    "Vivienne-Aurélie Vestergaard"
-],
-
-[
-    "Naja Kusunoki",
-    "Vaelric Night"
-],
-
-[
-    "Vaelric Night",
-    "Vivienne-Aurélie Vestergaard"
-],
-
-[
-    "Vaelric Night",
-    "Rena Kisaragi"
-],
-
-[
-    "Rena Kisaragi",
-    "Claude Morvane"
-],
-
-[
-    "Maybeth Prince",
-    "Claude Morvane"
-],
-
-[
-    "Claude Morvane",
-    "Keiranza Birkins"
-],
-
-[
-    "Vivienne-Aurélie Vestergaard",
-    "Maybeth Prince"
-],
-
-[
-    "Vivienne-Aurélie Vestergaard",
-    "Mireilisse de Castellane"
-],
-
-[
-    "Mireilisse de Castellane",
-    "Kawakubo Shinji"
-],
-
-    ]
-
-};
-
-
-/* =====================================================
    SAVE ORIGINAL DATA
 ===================================================== */
 
@@ -3553,7 +1923,7 @@ const originalLines =
 
 
 const originalPositions =
-    students.map(
+    getAllStudents().map(
         student => ({
 
             name:
@@ -4378,15 +2748,9 @@ function drawConstellation() {
     hideProfile();
 
 
-const studentsByMonth = {
-    June: juneStudents,
-    July: julyStudents,
-    August: augustStudents,
-    September: septemberStudents
-};
+    const monthStudents =
 
-const monthStudents =
-    studentsByMonth[currentMonth] || [];
+        studentsByMonth[currentMonth] || [];
 
 
     const studentMap =
@@ -4961,19 +3325,25 @@ function updateConnectedLines(
             }
 
 
+            const studentMap =
+                new Map(
+                    (studentsByMonth[currentMonth] || [])
+                        .map(student => [
+                            student.name,
+                            student
+                        ])
+                );
+
+
             const studentA =
-                students.find(
-                    student =>
-                        student.name ===
-                        connection[0]
+                studentMap.get(
+                    connection[0]
                 );
 
 
             const studentB =
-                students.find(
-                    student =>
-                        student.name ===
-                        connection[1]
+                studentMap.get(
+                    connection[1]
                 );
 
 
@@ -5180,12 +3550,7 @@ document
                 "STARS:\n\n";
 
 
-            students
-                .filter(
-                    student =>
-                        student.month ===
-                        currentMonth
-                )
+            (studentsByMonth[currentMonth] || [])
                 .forEach(
                     student => {
 
@@ -5299,12 +3664,12 @@ document
                 original => {
 
                     const student =
-                        students.find(
+                        (studentsByMonth[
+                            original.month
+                        ] || []).find(
                             item =>
                                 item.name ===
-                                original.name &&
-                                item.month ===
-                                original.month
+                                original.name
                         );
 
 
@@ -5489,18 +3854,6 @@ function updateMonthTitle() {
 ) {
     mapMonthTitle.textContent =
         "Apus";
-
-    } else if (
-    currentMonth === "August"
-) {
-    mapMonthTitle.textContent =
-        "Aquila";
-
-	} else if (
-    currentMonth === "September"
-) {
-    mapMonthTitle.textContent =
-        "Cygnus";
 
     } else {
 
