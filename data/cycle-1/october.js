@@ -4,7 +4,7 @@ const octoberStudents = [
 
     // RANK 1 — THE LUMINARY
     {
-        name: "Kawakubo Shinji",
+        name: "Shinji Kawakubo",
         month: "October",
         rank: 1,
         type: "BLUE",
@@ -195,8 +195,8 @@ const octoberLines = [
     ["Ryusarion Whitmore", "Maybeth Prince"],
     ["Maybeth Prince", "Arwynn Roderick"],
     ["Arwynn Roderick", "Evanthe Yūtenji"],
-    ["Arwynn Roderick", "Kawakubo Shinji"],
-    ["Carolina Beaumont", "Kawakubo Shinji"],
+    ["Arwynn Roderick", "Shinji Kawakubo"],
+    ["Carolina Beaumont", "Shinji Kawakubo"],
     ["Arwynn Roderick", "Vaelric Night"],
     ["Vaelric Night", "Carolina Beaumont"]
 ];
