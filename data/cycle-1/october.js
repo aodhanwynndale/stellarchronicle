@@ -200,3 +200,13 @@ const octoberLines = [
     ["Arwynn Roderick", "Vaelric Night"],
     ["Vaelric Night", "Carolina Beaumont"]
 ];
+
+/* OCTOBER — LACERTA */
+
+const octoberDescription = {
+    lines: [
+        "Hidden between brighter constellations,",
+        "the Little Lizard rests among the northern stars,",
+        "its subtle presence speaks of quiet wonders."
+    ]
+};
