@@ -1,3 +1,5 @@
+/* OCTOBER */
+
 const octoberStudents = [
 
     // RANK 1 — THE LUMINARY
@@ -49,9 +51,8 @@ const octoberStudents = [
         photo: "",
         quote: "",
         x: 882,
-        y: 296
+        y: 298
     },
-
     {
         name: "Valtherion Night",
         month: "October",
@@ -63,7 +64,6 @@ const octoberStudents = [
         x: 170,
         y: 422
     },
-
     {
         name: "Evanthe Yūtenji",
         month: "October",
@@ -75,7 +75,6 @@ const octoberStudents = [
         x: 427,
         y: 130
     },
-
     {
         name: "Ryusarion Whitmore",
         month: "October",
@@ -87,7 +86,6 @@ const octoberStudents = [
         x: 370,
         y: 235
     },
-
     {
         name: "Maybeth Prince",
         month: "October",
@@ -99,7 +97,6 @@ const octoberStudents = [
         x: 545,
         y: 341
     },
-
     {
         name: "Vaelric Night",
         month: "October",
@@ -108,10 +105,9 @@ const octoberStudents = [
         identity: "5015 · @fireswither",
         photo: "",
         quote: "",
-        x: 451,
-        y: 193
+        x: 704,
+        y: 293
     },
-
     {
         name: "Serica Yūtenji",
         month: "October",
@@ -120,10 +116,9 @@ const octoberStudents = [
         identity: "5025 · @spikemoth",
         photo: "",
         quote: "",
-        x: 398,
-        y: 438
+        x: 300,
+        y: 101
     },
-
     {
         name: "Daphne Blanchet",
         month: "October",
@@ -132,10 +127,9 @@ const octoberStudents = [
         identity: "5018 · @Mortalicspera",
         photo: "",
         quote: "",
-        x: 720,
-        y: 95
+        x: 735,
+        y: 99
     },
-
     {
         name: "Jean West",
         month: "October",
@@ -144,10 +138,9 @@ const octoberStudents = [
         identity: "4032 · @lifeuponlilies",
         photo: "",
         quote: "",
-        x: 630,
-        y: 407
+        x: 797,
+        y: 378
     },
-
     {
         name: "Mieru Kawakubo",
         month: "October",
@@ -156,10 +149,9 @@ const octoberStudents = [
         identity: "6029 · @talesoflele",
         photo: "",
         quote: "",
-        x: 376,
-        y: 270
+        x: 386,
+        y: 372
     },
-
     {
         name: "Flandr Lagrange",
         month: "October",
@@ -168,10 +160,9 @@ const octoberStudents = [
         identity: "6023 · @necrofantasjia",
         photo: "",
         quote: "",
-        x: 828,
-        y: 283
+        x: 905,
+        y: 190
     },
-
     {
         name: "Narel Blackwood",
         month: "October",
@@ -180,10 +171,9 @@ const octoberStudents = [
         identity: "6010 · @scutrvy",
         photo: "",
         quote: "",
-        x: 222,
-        y: 287
+        x: 163,
+        y: 209
     },
-
     {
         name: "Valentine Night",
         month: "October",
@@ -192,10 +182,21 @@ const octoberStudents = [
         identity: "4044 · @veilofchamber",
         photo: "",
         quote: "",
-        x: 556,
-        y: 493
+        x: 619,
+        y: 439
     }
 
 ];
 
-const octoberLines = [];
+const octoberLines = [
+    ["Celestine Zefraind", "Valtherion Night"],
+    ["Valtherion Night", "Ryusarion Whitmore"],
+    ["Ryusarion Whitmore", "Evanthe Yūtenji"],
+    ["Ryusarion Whitmore", "Maybeth Prince"],
+    ["Maybeth Prince", "Arwynn Roderick"],
+    ["Arwynn Roderick", "Evanthe Yūtenji"],
+    ["Arwynn Roderick", "Kawakubo Shinji"],
+    ["Carolina Beaumont", "Kawakubo Shinji"],
+    ["Arwynn Roderick", "Vaelric Night"],
+    ["Vaelric Night", "Carolina Beaumont"]
+];
