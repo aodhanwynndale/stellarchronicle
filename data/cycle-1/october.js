@@ -15,7 +15,7 @@ const octoberStudents = [
 
     // RANK 2 — THE RADIANT
     {
-        name: "Celestine Arcadia Zefraind",
+        name: "Celestine Zefraind",
         month: "October",
         rank: 2,
         type: "ORANGE",
@@ -28,7 +28,7 @@ const octoberStudents = [
 
     // RANK 3 — THE LUMINOUS
     {
-        name: "Arwynn Yūki Roderick",
+        name: "Arwynn Roderick",
         month: "October",
         rank: 3,
         type: "RED",
@@ -41,7 +41,7 @@ const octoberStudents = [
 
     // THE OBSERVERS
     {
-        name: "Carolina Rosalie Beaumont",
+        name: "Carolina Beaumont",
         month: "October",
         rank: 0,
         type: "WHITE",
@@ -53,7 +53,7 @@ const octoberStudents = [
     },
 
     {
-        name: "Valtherion Amalric Night",
+        name: "Valtherion Night",
         month: "October",
         rank: 0,
         type: "WHITE",
@@ -65,7 +65,7 @@ const octoberStudents = [
     },
 
     {
-        name: "Evanthe A. Yūtenji",
+        name: "Evanthe Yūtenji",
         month: "October",
         rank: 0,
         type: "WHITE",
@@ -77,7 +77,7 @@ const octoberStudents = [
     },
 
     {
-        name: "Ryusarion Aeden Whitmore",
+        name: "Ryusarion Whitmore",
         month: "October",
         rank: 0,
         type: "WHITE",
@@ -89,7 +89,7 @@ const octoberStudents = [
     },
 
     {
-        name: "Maybeth Rowan Prince",
+        name: "Maybeth Prince",
         month: "October",
         rank: 0,
         type: "WHITE",
@@ -101,7 +101,7 @@ const octoberStudents = [
     },
 
     {
-        name: "Vaelric Kavian Night",
+        name: "Vaelric Night",
         month: "October",
         rank: 0,
         type: "WHITE",
@@ -113,7 +113,7 @@ const octoberStudents = [
     },
 
     {
-        name: "Serica Amory Yūtenji",
+        name: "Serica Yūtenji",
         month: "October",
         rank: 0,
         type: "WHITE",
@@ -125,7 +125,7 @@ const octoberStudents = [
     },
 
     {
-        name: "Daphne Ophelia Blanchet",
+        name: "Daphne Blanchet",
         month: "October",
         rank: 0,
         type: "WHITE",
@@ -173,7 +173,7 @@ const octoberStudents = [
     },
 
     {
-        name: "Narel Evander Blackwood",
+        name: "Narel Blackwood",
         month: "October",
         rank: 0,
         type: "WHITE",
@@ -185,7 +185,7 @@ const octoberStudents = [
     },
 
     {
-        name: "Valentine Howl Night",
+        name: "Valentine Night",
         month: "October",
         rank: 0,
         type: "WHITE",
