@@ -480,3 +480,13 @@ const augustLines = [
 ],
 
   ];
+
+/* AUGUST — AQUILA */
+
+const augustDescription = {
+    lines: [
+        "The Eagle soars along the celestial river,",
+        "carrying the brilliance of Altair across the summer sky,",
+        "its wings stretch toward the unknown."
+    ]
+};
