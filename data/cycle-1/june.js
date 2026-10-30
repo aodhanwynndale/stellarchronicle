@@ -336,4 +336,10 @@ const juneLines = [
           "Seraphina Marsh"
         ]
 
-   ];
+   const juneDescription = {
+    lines: [
+        "A quiet guide in the northern sky,",
+        "its stars gather around Polaris,",
+        "a steadfast companion to those who seek their way."
+    ]
+};
