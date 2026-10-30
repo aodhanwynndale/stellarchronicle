@@ -4,7 +4,7 @@ const octoberStudents = [
             "Vaelric Night",
 
         month:
-            "october",
+            "October",
 
         rank:
             1,
@@ -34,7 +34,7 @@ const octoberStudents = [
             "Vivienne-Aurélie Vestergaard",
 
         month:
-            "october",
+            "October",
 
         rank:
             2,
@@ -64,7 +64,7 @@ const octoberStudents = [
             "Serica Yūtenji",
 
         month:
-            "october",
+            "October",
 
         rank:
             3,
@@ -94,7 +94,7 @@ const octoberStudents = [
             "Maybeth Prince",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -124,7 +124,7 @@ const octoberStudents = [
             "Kawakubo Shinji",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -154,7 +154,7 @@ const octoberStudents = [
             "Celestine Zefraind",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -184,7 +184,7 @@ const octoberStudents = [
             "Keiranza Birkins",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -214,7 +214,7 @@ const octoberStudents = [
             "Rena Kisaragi",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -244,7 +244,7 @@ const octoberStudents = [
             "Claude Morvane",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -274,7 +274,7 @@ const octoberStudents = [
             "Mireilisse de Castellane",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -304,7 +304,7 @@ const octoberStudents = [
             "Naja Kusunoki",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -334,7 +334,7 @@ const octoberStudents = [
             "Clèa Reese",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -364,7 +364,7 @@ const octoberStudents = [
             "Kennedict Morvane",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -394,7 +394,7 @@ const octoberStudents = [
             "Valentine Night",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -424,7 +424,7 @@ const octoberStudents = [
             "Valtherion Night",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
@@ -454,7 +454,7 @@ const octoberStudents = [
             "Ryusarion Whitmore",
 
         month:
-            "october",
+            "October",
 
         rank:
             0,
