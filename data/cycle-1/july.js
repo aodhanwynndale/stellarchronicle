@@ -316,3 +316,13 @@ const julyLines = [
 ],
 
 ];
+
+/* JULY — APUS */
+
+const julyDescription = {
+    lines: [
+        "Far beneath the southern heavens,",
+        "the Bird of Paradise spreads its wings,",
+        "even the faintest lights have a place in the vastness."
+    ]
+};
