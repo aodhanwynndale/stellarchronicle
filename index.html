@@ -1421,6 +1421,61 @@ svg {
         font-size: 8px;
         letter-spacing: 1.5px;
     }
+/* =====================================================
+   CONSTELLATION DESCRIPTION — TYPEWRITER
+===================================================== */
+
+.typewriter-description {
+    width: 100%;
+    max-width: 550px;
+    min-height: 42px;
+    margin: 14px auto 0;
+    padding: 0 8px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1.8;
+    letter-spacing: 0.35px;
+
+    color: rgba(238, 234, 255, 0.62);
+    text-align: center;
+
+    overflow-wrap: break-word;
+}
+
+.typewriter-description::after {
+    content: "▍";
+    display: inline-block;
+    margin-left: 3px;
+    color: rgba(238, 234, 255, 0.65);
+    animation: typewriter-cursor 0.8s steps(2, start) infinite;
+}
+
+.typewriter-description:empty {
+    display: none;
+}
+
+.typewriter-description:empty::after {
+    display: none;
+}
+
+@keyframes typewriter-cursor {
+    to {
+        visibility: hidden;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+    .typewriter-description {
+        max-width: 85%;
+        min-height: 48px;
+        margin-top: 12px;
+        font-size: 11px;
+        line-height: 1.7;
+    }
 }
 
 </style>
@@ -1502,6 +1557,12 @@ svg {
     <p id="constellation-name">
         Summer Sky · Northern Hemisphere
     </p>
+
+	<div
+        class="typewriter-description"
+        id="constellation-description"
+        aria-live="polite">
+    </div>
 
 </div>
 
@@ -1832,6 +1893,22 @@ let currentMonth =
    EXTERNAL ARCHIVE DATA
 ===================================================== */
 
+/* =====================================================
+   TYPEWRITER CONFIGURATION
+===================================================== */
+
+const TYPEWRITER_CONFIG = {
+
+    typingSpeed: 45,       // Jeda per huruf (ms)
+    sentenceDelay: 2200,   // Jeda sebelum teks dihapus (ms)
+    deleteSpeed: 20        // Jeda per huruf saat menghapus (ms)
+
+};
+
+
+/* =====================================================
+   CONSTELLATION DESCRIPTIONS
+===================================================== */
 const studentsByMonth = {
 
     June:
@@ -2050,6 +2127,154 @@ const profileQuote =
         "star-profile-quote"
     );
 
+	/* =====================================================
+   TYPEWRITER DOM
+===================================================== */
+
+const descriptionDisplay =
+    document.getElementById(
+        "constellation-description"
+    );
+
+
+let typewriterTimer = null;
+let typewriterToken = 0;
+
+
+/* =====================================================
+   STOP TYPEWRITER
+===================================================== */
+
+function stopTypewriter() {
+
+    typewriterToken++;
+
+    if (typewriterTimer !== null) {
+        clearTimeout(typewriterTimer);
+        typewriterTimer = null;
+    }
+
+    descriptionDisplay.textContent = "";
+
+}
+
+
+/* =====================================================
+   START TYPEWRITER
+===================================================== */
+
+function startTypewriter() {
+
+    stopTypewriter();
+
+    const description =
+        descriptionsByMonth[currentMonth];
+
+    if (
+        !description ||
+        !Array.isArray(description.lines) ||
+        description.lines.length === 0
+    ) {
+        return;
+    }
+
+    const lines =
+        description.lines.filter(
+            line =>
+                typeof line === "string" &&
+                line.trim() !== ""
+        );
+
+    if (lines.length === 0) {
+        return;
+    }
+
+    const token = typewriterToken;
+
+    let lineIndex = 0;
+    let characterIndex = 0;
+    let deleting = false;
+
+    function animate() {
+
+        if (token !== typewriterToken) {
+            return;
+        }
+
+        const currentLine =
+            lines[lineIndex];
+
+        const characters =
+            Array.from(currentLine);
+
+        if (!deleting) {
+
+            characterIndex++;
+
+            descriptionDisplay.textContent =
+                characters.slice(
+                    0,
+                    characterIndex
+                ).join("");
+
+            if (
+                characterIndex >=
+                characters.length
+            ) {
+
+                deleting = true;
+
+                typewriterTimer = setTimeout(
+                    animate,
+                    TYPEWRITER_CONFIG.sentenceDelay
+                );
+
+                return;
+            }
+
+            typewriterTimer = setTimeout(
+                animate,
+                TYPEWRITER_CONFIG.typingSpeed
+            );
+
+        } else {
+
+            characterIndex--;
+
+            descriptionDisplay.textContent =
+                characters.slice(
+                    0,
+                    characterIndex
+                ).join("");
+
+            if (characterIndex <= 0) {
+
+                deleting = false;
+
+                lineIndex =
+                    (lineIndex + 1) %
+                    lines.length;
+
+                typewriterTimer = setTimeout(
+                    animate,
+                    TYPEWRITER_CONFIG.typingSpeed
+                );
+
+                return;
+            }
+
+            typewriterTimer = setTimeout(
+                animate,
+                TYPEWRITER_CONFIG.deleteSpeed
+            );
+
+        }
+
+    }
+
+    animate();
+
+}
 
 /* =====================================================
    REFERENCE GUIDE DOM
@@ -3857,6 +4082,9 @@ function updateMonthTitle() {
 mapMonthTitle.textContent =
     cycle.constellations[currentMonth] || currentMonth;
 
+	// Update monthly constellation description
+startTypewriter();
+	
 }
 
 
