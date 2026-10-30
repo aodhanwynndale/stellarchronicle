@@ -1421,6 +1421,7 @@ svg {
         font-size: 8px;
         letter-spacing: 1.5px;
     }
+}
 /* =====================================================
    CONSTELLATION DESCRIPTION — TYPEWRITER
 ===================================================== */
@@ -1964,6 +1965,32 @@ const constellationLines = {
     November:
         typeof novemberLines !== "undefined"
             ? novemberLines : []
+
+const descriptionsByMonth = {
+    June:
+        typeof juneDescription !== "undefined"
+            ? juneDescription : null,
+
+    July:
+        typeof julyDescription !== "undefined"
+            ? julyDescription : null,
+
+    August:
+        typeof augustDescription !== "undefined"
+            ? augustDescription : null,
+
+    September:
+        typeof septemberDescription !== "undefined"
+            ? septemberDescription : null,
+
+    October:
+        typeof octoberDescription !== "undefined"
+            ? octoberDescription : null,
+
+    November:
+        typeof novemberDescription !== "undefined"
+            ? novemberDescription : null
+};
 
 };
 
@@ -4083,9 +4110,11 @@ function updateMonthTitle() {
 mapMonthTitle.textContent =
     cycle.constellations[currentMonth] || currentMonth;
 
-	// Update monthly constellation description
-startTypewriter();
-	
+// Typewriter tidak boleh menghentikan proses gambar konstelasi
+try {
+    startTypewriter();
+} catch (error) {
+    console.error("Typewriter error:", error);
 }
 
 
