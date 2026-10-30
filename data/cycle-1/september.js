@@ -542,3 +542,13 @@ const septemberLines = [
 ],
 
 ];
+
+/* SEPTEMBER — CYGNUS */
+
+const septemberDescription = {
+    lines: [
+        "Across the luminous band of the Milky Way,",
+        "the Swan takes flight,",
+        "its outstretched wings trace a celestial cross."
+    ]
+};
