@@ -17,6 +17,23 @@
 
 <style>
 
+/* LOCAL FONTS */
+@font-face {
+    font-family: 'Starstruck';
+    src: url('./fonts/starstruck.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Starmap';
+    src: url('./fonts/starmap.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* =====================================================
    GLOBAL
 ===================================================== */
@@ -140,6 +157,11 @@ header {
 }
 
 h1 {
+
+    font-family:
+        'Starstruck',
+        Georgia,
+        serif;
 
     margin:
         10px 0 5px;
@@ -611,6 +633,8 @@ h1 {
 
     opacity:
         0.38;
+	
+	color: rgba(238, 234, 255, 0.65);
 
     text-transform:
         uppercase;
@@ -1435,7 +1459,7 @@ svg {
     min-height: 42px;
     margin: 0;
     padding: 0;
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: 'Starmap', monospace;
     font-size: 11px;
     font-style: italic;
     line-height: 1.7;
@@ -1501,7 +1525,7 @@ svg {
     </h1>
 
     <div class="subtitle">
-        A record of stars that crossed the classroom sky.
+        A record of stars that crossed the advanced astronomy classroom sky.
     </div>
 
 </header>
@@ -1902,7 +1926,7 @@ let currentMonth =
 
 const TYPEWRITER_CONFIG = {
 
-    typingSpeed: 45,       // Jeda per huruf (ms)
+    typingSpeed: 35,       // Jeda per huruf (ms)
     sentenceDelay: 2200,   // Jeda sebelum teks dihapus (ms)
     deleteSpeed: 20        // Jeda per huruf saat menghapus (ms)
 
