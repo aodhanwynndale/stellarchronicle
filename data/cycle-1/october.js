@@ -179,7 +179,7 @@ const octoberStudents = [
         month: "October",
         rank: 0,
         type: "WHITE",
-        identity: "4044 · @veilofchamber",
+        identity: "4044 · @VeilOfChamber",
         photo: "",
         quote: "",
         x: 619,
