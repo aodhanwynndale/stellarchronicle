@@ -1514,6 +1514,102 @@ svg {
     }
 }
 
+
+/* =====================================================
+   STAR EDITOR (ADD / EDIT / BULK / COPY MODALS)
+===================================================== */
+.se-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(3, 5, 14, 0.72);
+    padding: 16px;
+}
+.se-backdrop[hidden] { display: none; }
+.se-dialog {
+    width: min(460px, 100%);
+    max-height: 92vh;
+    overflow-y: auto;
+    padding: 18px 18px 14px;
+    background: #0d1124;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 12px;
+    font-family: Arial, sans-serif;
+    color: #eeeaff;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
+}
+.se-dialog.wide { width: min(620px, 100%); }
+.se-title {
+    font-size: 10px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: 12px;
+}
+.se-field {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-bottom: 10px;
+}
+.se-field input,
+.se-field select,
+.se-field textarea {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    padding: 8px 10px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 6px;
+}
+.se-field select option { color: #111; }
+.se-field textarea {
+    min-height: 170px;
+    resize: vertical;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.se-field input:focus,
+.se-field select:focus,
+.se-field textarea:focus {
+    outline: none;
+    border-color: rgba(150, 190, 255, 0.6);
+}
+.se-note {
+    font-size: 10px;
+    line-height: 1.5;
+    opacity: 0.55;
+    margin: -2px 0 10px;
+}
+.se-msg {
+    min-height: 14px;
+    font-size: 11px;
+    color: #ff9d8f;
+    margin-bottom: 8px;
+}
+.se-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.se-spacer { flex: 1; }
+.se-danger {
+    border-color: rgba(255, 98, 92, 0.45);
+    color: #ff9d8f;
+}
+
 </style>
 
 </head>
@@ -1671,17 +1767,29 @@ svg {
         </div>
 
         <div class="editor-hint">
-
-            Drag stars · Add Line: click two stars ·
+            Drag stars · Click a star to edit it · Add Line: click two stars ·
             Click a line to delete it
-
         </div>
+        <div class="editor-hint" id="star-stats"></div>
+        <div class="editor-hint" id="draft-status"></div>
 
     </div>
 
 
     <div class="editor-buttons">
 
+
+        <button
+            class="editor-button"
+            id="add-star">
+            ＋ ADD STAR
+        </button>
+
+        <button
+            class="editor-button"
+            id="bulk-add">
+            ＋ BULK ADD
+        </button>
 
         <button
             class="editor-button"
@@ -1868,12 +1976,104 @@ svg {
      MONTH DATA
 ===================================================== -->
 
+<!-- =====================================================
+     STAR EDITOR MODALS
+===================================================== -->
+<div class="se-backdrop" id="star-modal" hidden>
+    <div class="se-dialog" role="dialog" aria-modal="true">
+        <div class="se-title" id="star-modal-title">Add Star</div>
+
+        <label class="se-field">Nama
+            <input id="sf-name" type="text" autocomplete="off">
+        </label>
+
+        <label class="se-field">Rank
+            <select id="sf-rank">
+                <option value="1">1 · The Luminary (biru)</option>
+                <option value="2">2 · The Radiant (oranye)</option>
+                <option value="3">3 · The Luminous (merah)</option>
+                <option value="0" selected>0 · The Observers (putih)</option>
+            </select>
+        </label>
+
+        <label class="se-field">Identity
+            <input id="sf-identity" type="text" autocomplete="off"
+                   placeholder="6015 · @username">
+        </label>
+
+        <label class="se-field">Photo
+            <input id="sf-photo" type="text" autocomplete="off"
+                   placeholder="images/cycle-1/nama.jpg">
+        </label>
+        <div class="se-note">Foto hanya ditampilkan untuk rank 1–3. Warna bintang otomatis mengikuti rank.</div>
+
+        <label class="se-field">Quote
+            <input id="sf-quote" type="text" autocomplete="off">
+        </label>
+
+        <div class="se-msg" id="sf-msg"></div>
+
+        <div class="se-actions">
+            <button class="editor-button se-danger" id="sf-delete" type="button">DELETE</button>
+            <span class="se-spacer"></span>
+            <button class="editor-button" id="sf-cancel" type="button">CANCEL</button>
+            <button class="editor-button active" id="sf-save" type="button">SAVE</button>
+        </div>
+    </div>
+</div>
+
+<div class="se-backdrop" id="bulk-modal" hidden>
+    <div class="se-dialog wide" role="dialog" aria-modal="true">
+        <div class="se-title" id="bulk-title">Bulk Add</div>
+
+        <label class="se-field">Satu murid per baris
+            <textarea id="bulk-text" spellcheck="false"
+                placeholder="Nama | rank | identity | photo | quote&#10;Shinji Kawakubo | 1 | 6015 · @cinetelier | images/cycle-1/shinji.jpg&#10;Celestine Zefraind | 2 | 4013 · @DEATHLYSlNNER&#10;Jean West"></textarea>
+        </label>
+        <div class="se-note">
+            Format: <b>Nama | rank | identity | photo | quote</b>. Hanya nama yang wajib;
+            rank kosong = 0 (Observers). Bisa juga tempel langsung dari Excel / Google Sheets
+            (pemisah tab). Posisi bintang disebar otomatis, lalu rapikan dengan drag.
+        </div>
+
+        <div class="se-msg" id="bulk-msg"></div>
+
+        <div class="se-actions">
+            <span class="se-spacer"></span>
+            <button class="editor-button" id="bulk-cancel" type="button">CANCEL</button>
+            <button class="editor-button active" id="bulk-apply" type="button">ADD STARS</button>
+        </div>
+    </div>
+</div>
+
+<div class="se-backdrop" id="copy-modal" hidden>
+    <div class="se-dialog wide" role="dialog" aria-modal="true">
+        <div class="se-title" id="copy-title">Copy Data</div>
+        <div class="se-note" style="margin-top:0">
+            Clipboard diblokir browser. Salin manual: klik kotak lalu Ctrl+A, Ctrl+C.
+        </div>
+        <label class="se-field">
+            <textarea id="copy-text" readonly spellcheck="false" style="min-height:260px"></textarea>
+        </label>
+        <div class="se-actions">
+            <span class="se-spacer"></span>
+            <button class="editor-button active" id="copy-close" type="button">CLOSE</button>
+        </div>
+    </div>
+</div>
+
 <script src="data/cycle-1/june.js"></script>
 <script src="data/cycle-1/july.js"></script>
 <script src="data/cycle-1/august.js"></script>
 <script src="data/cycle-1/september.js"></script>
 <script src="data/cycle-1/october.js"></script>
 <script src="data/cycle-1/november.js"></script>
+<script src="data/cycle-2/december.js"></script>
+<script src="data/cycle-2/january.js"></script>
+<script src="data/cycle-2/february.js"></script>
+<script src="data/cycle-2/march.js"></script>
+<script src="data/cycle-2/april.js"></script>
+<script src="data/cycle-2/may.js"></script>
 
 
 <script>
@@ -1913,9 +2113,58 @@ const cycles = [
 		    November: "LOADING . . ."
 		}
 
+    },
+
+    {
+
+        name:
+            "CYCLE II",
+
+        date:
+            "December 2026 — May 2027",
+
+        months: [
+
+            "December",
+            "January",
+            "February",
+            "March",
+            "April",
+            "May"
+
+        ],
+
+        monthYears: {
+            December: 2026,
+            January: 2027,
+            February: 2027,
+            March: 2027,
+            April: 2027,
+            May: 2027
+        },
+
+        constellations: {
+            December: "LOADING . . .",
+            January: "LOADING . . .",
+            February: "LOADING . . .",
+            March: "LOADING . . .",
+            April: "LOADING . . .",
+            May: "LOADING . . ."
+        }
+
     }
 
 ];
+
+
+function getMonthYear(month) {
+    for (const cycle of cycles) {
+        if (cycle.months.includes(month)) {
+            return (cycle.monthYears && cycle.monthYears[month]) || 2026;
+        }
+    }
+    return 2026;
+}
 
 
 let currentCycle =
@@ -1970,7 +2219,25 @@ const studentsByMonth = {
 
     November:
         typeof novemberStudents !== "undefined"
-            ? novemberStudents : []
+            ? novemberStudents : [],
+    December:
+        typeof decemberStudents !== "undefined"
+            ? decemberStudents : [],
+    January:
+        typeof januaryStudents !== "undefined"
+            ? januaryStudents : [],
+    February:
+        typeof februaryStudents !== "undefined"
+            ? februaryStudents : [],
+    March:
+        typeof marchStudents !== "undefined"
+            ? marchStudents : [],
+    April:
+        typeof aprilStudents !== "undefined"
+            ? aprilStudents : [],
+    May:
+        typeof mayStudents !== "undefined"
+            ? mayStudents : []
 
 };
 
@@ -1999,7 +2266,25 @@ const constellationLines = {
 
     November:
         typeof novemberLines !== "undefined"
-            ? novemberLines : []
+            ? novemberLines : [],
+    December:
+        typeof decemberLines !== "undefined"
+            ? decemberLines : [],
+    January:
+        typeof januaryLines !== "undefined"
+            ? januaryLines : [],
+    February:
+        typeof februaryLines !== "undefined"
+            ? februaryLines : [],
+    March:
+        typeof marchLines !== "undefined"
+            ? marchLines : [],
+    April:
+        typeof aprilLines !== "undefined"
+            ? aprilLines : [],
+    May:
+        typeof mayLines !== "undefined"
+            ? mayLines : []
 
 };
 
@@ -2027,7 +2312,25 @@ const descriptionsByMonth = {
 
     November:
         typeof novemberDescription !== "undefined"
-            ? novemberDescription : null
+            ? novemberDescription : null,
+    December:
+        typeof decemberDescription !== "undefined"
+            ? decemberDescription : null,
+    January:
+        typeof januaryDescription !== "undefined"
+            ? januaryDescription : null,
+    February:
+        typeof februaryDescription !== "undefined"
+            ? februaryDescription : null,
+    March:
+        typeof marchDescription !== "undefined"
+            ? marchDescription : null,
+    April:
+        typeof aprilDescription !== "undefined"
+            ? aprilDescription : null,
+    May:
+        typeof mayDescription !== "undefined"
+            ? mayDescription : null
 };
 
 
@@ -2865,7 +3168,7 @@ function showProfile(
 
 
     profileRank.textContent =
-        `${rankTitles[student.rank] || "The Observers"} · ${student.month} 2026`;
+        `${rankTitles[student.rank] || "The Observers"} · ${student.month} ${getMonthYear(student.month)}`;
 
 
     profileInfo.textContent =
@@ -3395,6 +3698,13 @@ function drawConstellation() {
                         );
 
                     }
+                    else if (
+                        editMode &&
+                        !addingLine &&
+                        !wasDragged(event)
+                    ) {
+                        openStarForm(student);
+                    }
 
                 }
             );
@@ -3829,94 +4139,6 @@ function selectStarForLine(
 
 
 /* =====================================================
-   COPY DATA
-===================================================== */
-
-document
-    .getElementById(
-        "copy-data"
-    )
-    .addEventListener(
-        "click",
-        async () => {
-
-            let output =
-
-                `/* ${currentMonth.toUpperCase()} */\n\n`;
-
-
-            output +=
-                "STARS:\n\n";
-
-
-            (studentsByMonth[currentMonth] || [])
-                .forEach(
-                    student => {
-
-                        output +=
-
-`{
-    name: "${student.name}",
-    x: ${student.x},
-    y: ${student.y}
-},
-
-`;
-
-                    }
-                );
-
-
-            output +=
-                "\nLINES:\n\n";
-
-
-            (
-                constellationLines[
-                    currentMonth
-                ] || []
-            )
-            .forEach(
-                line => {
-
-                    output +=
-
-`[
-    "${line[0]}",
-    "${line[1]}"
-],
-
-`;
-
-                }
-            );
-
-
-            try {
-
-                await navigator.clipboard.writeText(
-                    output
-                );
-
-
-                alert(
-                    "Star positions and constellation lines copied!"
-                );
-
-
-            } catch (error) {
-
-                alert(
-                    output
-                );
-
-            }
-
-        }
-    );
-
-
-/* =====================================================
    RESET LINES
 ===================================================== */
 
@@ -3939,72 +4161,6 @@ document
                         ] || []
                     )
                 );
-
-
-            drawConstellation();
-
-        }
-    );
-
-
-/* =====================================================
-   RESET EVERYTHING
-===================================================== */
-
-document
-    .getElementById(
-        "reset-editor"
-    )
-    .addEventListener(
-        "click",
-        () => {
-
-            originalPositions.forEach(
-                original => {
-
-                    const student =
-                        (studentsByMonth[
-                            original.month
-                        ] || []).find(
-                            item =>
-                                item.name ===
-                                original.name
-                        );
-
-
-                    if (student) {
-
-                        student.x =
-                            original.x;
-
-                        student.y =
-                            original.y;
-
-                    }
-
-                }
-            );
-
-
-            Object.keys(
-                originalLines
-            ).forEach(
-                month => {
-
-                    constellationLines[
-                        month
-                    ] =
-
-                        JSON.parse(
-                            JSON.stringify(
-                                originalLines[
-                                    month
-                                ]
-                            )
-                        );
-
-                }
-            );
 
 
             drawConstellation();
@@ -4128,7 +4284,25 @@ function updateMonthTitle() {
             "Autumn Sky · Northern Hemisphere",
 
         November:
-            "Late Autumn Sky · Northern Hemisphere"
+            "Late Autumn Sky · Northern Hemisphere",
+
+        December:
+            "Early Winter Sky · Northern Hemisphere",
+
+        January:
+            "Winter Sky · Northern Hemisphere",
+
+        February:
+            "Late Winter Sky · Northern Hemisphere",
+
+        March:
+            "Early Spring Sky · Northern Hemisphere",
+
+        April:
+            "Spring Sky · Northern Hemisphere",
+
+        May:
+            "Late Spring Sky · Northern Hemisphere"
 
     };
 
@@ -4278,6 +4452,511 @@ document
 
         }
     );
+
+
+/* =====================================================
+   STAR EDITOR
+   Add Star · Edit / Delete · Bulk Add · Copy Data · Draft
+===================================================== */
+
+const RANK_TO_TYPE = {
+    0: "WHITE",
+    1: "BLUE",
+    2: "ORANGE",
+    3: "RED"
+};
+
+const MAP_WIDTH  = 1000;
+const MAP_HEIGHT = 562.5;
+
+const originalStudents =
+    JSON.parse(JSON.stringify(studentsByMonth));
+
+const originalSnapshot =
+    JSON.stringify({
+        s: studentsByMonth,
+        l: constellationLines
+    });
+
+function hashString(str) {
+    let h = 5381;
+    for (let i = 0; i < str.length; i++) {
+        h = ((h << 5) + h + str.charCodeAt(i)) | 0;
+    }
+    return String(h);
+}
+
+const originalHash = hashString(originalSnapshot);
+const DRAFT_KEY    = "stellarchronicle-editor-draft-v1";
+
+/* ---------- Draft (autosave di browser, hanya mode editor) ---------- */
+
+function setDraftStatus(text) {
+    const el = document.getElementById("draft-status");
+    if (el) el.textContent = text;
+}
+
+function saveDraft() {
+    if (!editMode) return;
+    const snap = JSON.stringify({
+        s: studentsByMonth,
+        l: constellationLines
+    });
+    try {
+        if (snap === originalSnapshot) {
+            localStorage.removeItem(DRAFT_KEY);
+            setDraftStatus("Belum ada perubahan dari file data");
+            return;
+        }
+        localStorage.setItem(DRAFT_KEY, JSON.stringify({
+            fp: originalHash,
+            snap: snap,
+            savedAt: Date.now()
+        }));
+        setDraftStatus(
+            "✓ Draft tersimpan otomatis " +
+            new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) +
+            " · jangan lupa COPY DATA lalu tempel ke file bulan"
+        );
+    } catch (error) {
+        setDraftStatus("Draft tidak bisa disimpan (storage browser diblokir)");
+    }
+}
+
+function restoreDraft() {
+    if (!editMode) return;
+    try {
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if (!raw) return;
+        const draft = JSON.parse(raw);
+        if (draft.fp !== originalHash) {
+            localStorage.removeItem(DRAFT_KEY);
+            setDraftStatus("Draft lama dibuang karena file data sudah berubah");
+            return;
+        }
+        const data = JSON.parse(draft.snap);
+        Object.keys(studentsByMonth).forEach(month => {
+            if (Array.isArray(data.s[month])) {
+                studentsByMonth[month].splice(
+                    0,
+                    studentsByMonth[month].length,
+                    ...data.s[month]
+                );
+            }
+        });
+        Object.keys(constellationLines).forEach(month => {
+            if (Array.isArray(data.l[month])) {
+                constellationLines[month] = data.l[month];
+            }
+        });
+    } catch (error) {}
+}
+
+/* ---------- Hook drawConstellation: stats + autosave ---------- */
+
+function updateStarStats() {
+    const el = document.getElementById("star-stats");
+    if (!el) return;
+    const list = studentsByMonth[currentMonth] || [];
+    const c = { 0: 0, 1: 0, 2: 0, 3: 0 };
+    list.forEach(s => { c[s.rank] = (c[s.rank] || 0) + 1; });
+    el.textContent =
+        `${currentMonth} · ${list.length} bintang · ` +
+        `Luminary ${c[1]} · Radiant ${c[2]} · Luminous ${c[3]} · Observers ${c[0]}`;
+}
+
+const drawConstellationOriginal = drawConstellation;
+
+drawConstellation = function () {
+    drawConstellationOriginal();
+    if (editMode) {
+        updateStarStats();
+        saveDraft();
+    }
+};
+
+svg.addEventListener("pointerup", () => { if (editMode) saveDraft(); });
+svg.addEventListener("pointercancel", () => { if (editMode) saveDraft(); });
+
+/* ---------- Klik vs drag ---------- */
+
+let lastPointerDown = null;
+
+svg.addEventListener("pointerdown", event => {
+    lastPointerDown = { x: event.clientX, y: event.clientY };
+}, true);
+
+function wasDragged(event) {
+    if (!lastPointerDown) return false;
+    return Math.hypot(
+        event.clientX - lastPointerDown.x,
+        event.clientY - lastPointerDown.y
+    ) > 4;
+}
+
+/* ---------- Helper ---------- */
+
+function findFreePosition(extra) {
+    const points =
+        (studentsByMonth[currentMonth] || []).concat(extra || []);
+    for (let attempt = 0; attempt < 400; attempt++) {
+        const minDistance = attempt < 200 ? 70 : 45;
+        const x = Math.round(60 + Math.random() * (MAP_WIDTH - 120));
+        const y = Math.round(50 + Math.random() * (MAP_HEIGHT - 100));
+        if (points.every(p => Math.hypot(p.x - x, p.y - y) >= minDistance)) {
+            return { x, y };
+        }
+    }
+    return {
+        x: Math.round(60 + Math.random() * (MAP_WIDTH - 120)),
+        y: Math.round(50 + Math.random() * (MAP_HEIGHT - 100))
+    };
+}
+
+function nameTaken(name, exceptStar) {
+    const key = name.trim().toLowerCase();
+    return (studentsByMonth[currentMonth] || []).some(
+        s => s !== exceptStar && s.name.trim().toLowerCase() === key
+    );
+}
+
+/* ---------- Modal: Add / Edit star ---------- */
+
+const starModal   = document.getElementById("star-modal");
+const bulkModal   = document.getElementById("bulk-modal");
+const copyModal   = document.getElementById("copy-modal");
+const sfName      = document.getElementById("sf-name");
+const sfRank      = document.getElementById("sf-rank");
+const sfIdentity  = document.getElementById("sf-identity");
+const sfPhoto     = document.getElementById("sf-photo");
+const sfQuote     = document.getElementById("sf-quote");
+const sfMsg       = document.getElementById("sf-msg");
+const sfDelete    = document.getElementById("sf-delete");
+const bulkText    = document.getElementById("bulk-text");
+const bulkMsg     = document.getElementById("bulk-msg");
+
+let editingStar = null;
+
+function closeModals() {
+    starModal.hidden = true;
+    bulkModal.hidden = true;
+    copyModal.hidden = true;
+    editingStar = null;
+}
+
+function openStarForm(student) {
+    editingStar = student || null;
+    document.getElementById("star-modal-title").textContent =
+        (student ? "Edit Star" : "Add Star") + " · " + currentMonth;
+    sfName.value     = student ? student.name : "";
+    sfRank.value     = student ? String(student.rank) : "0";
+    sfIdentity.value = student ? (student.identity || "") : "";
+    sfPhoto.value    = student ? (student.photo || "") : "";
+    sfQuote.value    = student ? (student.quote || "") : "";
+    sfPhoto.placeholder = `images/cycle-${currentCycle + 1}/nama.jpg`;
+    sfDelete.style.display = student ? "" : "none";
+    sfMsg.textContent = "";
+    starModal.hidden = false;
+    sfName.focus();
+    sfName.select();
+}
+
+function saveStarForm() {
+    const name = sfName.value.trim();
+    if (!name) {
+        sfMsg.textContent = "Nama wajib diisi.";
+        return;
+    }
+    if (nameTaken(name, editingStar)) {
+        sfMsg.textContent =
+            "Nama ini sudah ada di bulan ini. Nama harus unik karena garis memakai nama.";
+        return;
+    }
+    const rank = parseInt(sfRank.value, 10);
+    const data = {
+        name: name,
+        rank: rank,
+        type: RANK_TO_TYPE[rank],
+        identity: sfIdentity.value.trim(),
+        photo: sfPhoto.value.trim(),
+        quote: sfQuote.value.trim()
+    };
+
+    if (editingStar) {
+        const oldName = editingStar.name;
+        Object.assign(editingStar, data);
+        if (oldName !== name) {
+            (constellationLines[currentMonth] || []).forEach(line => {
+                if (line[0] === oldName) line[0] = name;
+                if (line[1] === oldName) line[1] = name;
+            });
+        }
+    } else {
+        const pos = findFreePosition();
+        studentsByMonth[currentMonth].push({
+            name: data.name,
+            month: currentMonth,
+            rank: data.rank,
+            type: data.type,
+            identity: data.identity,
+            photo: data.photo,
+            quote: data.quote,
+            x: pos.x,
+            y: pos.y
+        });
+    }
+
+    closeModals();
+    selectedStar = null;
+    drawConstellation();
+}
+
+function deleteStarFromForm() {
+    if (!editingStar) return;
+    const target = editingStar;
+    if (!confirm(`Hapus bintang "${target.name}" beserta garis yang terhubung?`)) {
+        return;
+    }
+    const list = studentsByMonth[currentMonth];
+    const index = list.indexOf(target);
+    if (index > -1) list.splice(index, 1);
+    constellationLines[currentMonth] =
+        (constellationLines[currentMonth] || []).filter(
+            line => line[0] !== target.name && line[1] !== target.name
+        );
+    closeModals();
+    selectedStar = null;
+    drawConstellation();
+}
+
+document.getElementById("add-star").addEventListener("click", () => openStarForm(null));
+document.getElementById("sf-save").addEventListener("click", saveStarForm);
+document.getElementById("sf-cancel").addEventListener("click", closeModals);
+sfDelete.addEventListener("click", deleteStarFromForm);
+
+/* ---------- Modal: Bulk add ---------- */
+
+function parseBulk(text) {
+    const added = [];
+    const skipped = [];
+    const existing = new Set(
+        (studentsByMonth[currentMonth] || []).map(s => s.name.trim().toLowerCase())
+    );
+    text.split(/\r?\n/).forEach(rawLine => {
+        const line = rawLine.trim();
+        if (!line) return;
+        const parts = line.split(/\t|\|/).map(p => p.trim());
+        const name = parts[0];
+        if (!name) return;
+
+        let rank = 0;
+        if (parts[1] !== undefined && parts[1] !== "") {
+            const r = parseInt(parts[1], 10);
+            if (![0, 1, 2, 3].includes(r)) {
+                skipped.push(`${name} (rank "${parts[1]}" tidak valid)`);
+                return;
+            }
+            rank = r;
+        }
+
+        const key = name.toLowerCase();
+        if (existing.has(key)) {
+            skipped.push(`${name} (nama sudah ada / kembar)`);
+            return;
+        }
+        existing.add(key);
+
+        added.push({
+            name: name,
+            month: currentMonth,
+            rank: rank,
+            type: RANK_TO_TYPE[rank],
+            identity: parts[2] || "",
+            photo: parts[3] || "",
+            quote: parts[4] || "",
+            x: 0,
+            y: 0
+        });
+    });
+    return { added, skipped };
+}
+
+function openBulkForm() {
+    document.getElementById("bulk-title").textContent = "Bulk Add · " + currentMonth;
+    bulkMsg.textContent = "";
+    bulkModal.hidden = false;
+    bulkText.focus();
+}
+
+function applyBulk() {
+    const { added, skipped } = parseBulk(bulkText.value);
+    if (!added.length) {
+        bulkMsg.textContent = skipped.length
+            ? "Tidak ada yang ditambahkan. Dilewati: " + skipped.join("; ")
+            : "Tidak ada baris yang bisa dibaca.";
+        return;
+    }
+    const placed = [];
+    added.forEach(star => {
+        const pos = findFreePosition(placed);
+        star.x = pos.x;
+        star.y = pos.y;
+        placed.push(star);
+    });
+    studentsByMonth[currentMonth].push(...added);
+
+    bulkText.value = "";
+    closeModals();
+    selectedStar = null;
+    drawConstellation();
+
+    if (skipped.length) {
+        alert(`${added.length} bintang ditambahkan.\nDilewati:\n- ` + skipped.join("\n- "));
+    }
+}
+
+document.getElementById("bulk-add").addEventListener("click", openBulkForm);
+document.getElementById("bulk-apply").addEventListener("click", applyBulk);
+document.getElementById("bulk-cancel").addEventListener("click", closeModals);
+document.getElementById("copy-close").addEventListener("click", closeModals);
+
+[starModal, bulkModal, copyModal].forEach(modal => {
+    modal.addEventListener("mousedown", event => {
+        if (event.target === modal) closeModals();
+    });
+});
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeModals();
+    if (
+        event.key === "Enter" &&
+        !starModal.hidden &&
+        event.target.tagName === "INPUT"
+    ) {
+        event.preventDefault();
+        saveStarForm();
+    }
+});
+
+/* ---------- COPY DATA (format lengkap sama seperti file bulan) ---------- */
+
+function jsString(value) {
+    return JSON.stringify(value == null ? "" : String(value));
+}
+
+function starToText(star, month) {
+    return (
+`    {
+        name: ${jsString(star.name)},
+        month: ${jsString(star.month || month)},
+        rank: ${star.rank},
+        type: ${jsString(star.type || RANK_TO_TYPE[star.rank])},
+        identity: ${jsString(star.identity)},
+        photo: ${jsString(star.photo)},
+        quote: ${jsString(star.quote)},
+        x: ${star.x},
+        y: ${star.y}
+    }`);
+}
+
+function buildMonthData(month) {
+    month = month || currentMonth;
+    const base = month.toLowerCase();
+    const cycle = cycles[currentCycle];
+    const constellation =
+        (cycle.constellations && cycle.constellations[month]) || "";
+    const list = studentsByMonth[month] || [];
+
+    const groups = [
+        { rank: 1, label: "RANK 1 — THE LUMINARY" },
+        { rank: 2, label: "RANK 2 — THE RADIANT" },
+        { rank: 3, label: "RANK 3 — THE LUMINOUS" },
+        { rank: 0, label: "THE OBSERVERS" }
+    ];
+
+    const blocks = [];
+    groups.forEach(group => {
+        const members = list.filter(s => s.rank === group.rank);
+        if (!members.length) return;
+        blocks.push(
+            `    // ${group.label}\n` +
+            members.map(s => starToText(s, month)).join(",\n")
+        );
+    });
+
+    let out = `/* ${month.toUpperCase()} */\n\n`;
+    out += `const ${base}Students = [\n\n`;
+    out += blocks.join(",\n\n");
+    out += `\n\n];\n\n`;
+
+    const lines = constellationLines[month] || [];
+    out += `const ${base}Lines = [\n`;
+    out += lines.map(l => `    [${jsString(l[0])}, ${jsString(l[1])}]`).join(",\n");
+    out += `\n];\n`;
+
+    const description = descriptionsByMonth[month];
+    if (description && Array.isArray(description.lines)) {
+        const suffix =
+            constellation && !/loading/i.test(constellation)
+                ? " — " + constellation.toUpperCase()
+                : "";
+        out += `\n/* ${month.toUpperCase()}${suffix} */\n\n`;
+        out += `const ${base}Description = {\n    lines: [\n`;
+        out += description.lines.map(l => `        ${jsString(l)}`).join(",\n");
+        out += `\n    ]\n};\n`;
+    }
+
+    return out;
+}
+
+document.getElementById("copy-data").addEventListener("click", async () => {
+    const output = buildMonthData(currentMonth);
+    const file = `data/cycle-${currentCycle + 1}/${currentMonth.toLowerCase()}.js`;
+    const count = (studentsByMonth[currentMonth] || []).length;
+    try {
+        await navigator.clipboard.writeText(output);
+        alert(
+            `Data ${currentMonth} disalin (${count} bintang).\n` +
+            `Tempel menggantikan seluruh isi ${file}`
+        );
+    } catch (error) {
+        document.getElementById("copy-title").textContent =
+            `Copy Data · ${currentMonth} → ${file}`;
+        document.getElementById("copy-text").value = output;
+        copyModal.hidden = false;
+        document.getElementById("copy-text").focus();
+        document.getElementById("copy-text").select();
+    }
+});
+
+/* ---------- RESET ALL (kembali ke data dari file) ---------- */
+
+document.getElementById("reset-editor").addEventListener("click", () => {
+    if (!confirm(
+        "Reset SEMUA perubahan (bintang, posisi, garis) di semua bulan " +
+        "kembali ke data dari file?"
+    )) {
+        return;
+    }
+    Object.keys(studentsByMonth).forEach(month => {
+        studentsByMonth[month].splice(
+            0,
+            studentsByMonth[month].length,
+            ...JSON.parse(JSON.stringify(originalStudents[month] || []))
+        );
+    });
+    Object.keys(originalLines).forEach(month => {
+        constellationLines[month] =
+            JSON.parse(JSON.stringify(originalLines[month]));
+    });
+    selectedStar = null;
+    try { localStorage.removeItem(DRAFT_KEY); } catch (error) {}
+    drawConstellation();
+});
+
+/* ---------- Pulihkan draft sebelum gambar pertama ---------- */
+
+restoreDraft();
 
 
 /* =====================================================
