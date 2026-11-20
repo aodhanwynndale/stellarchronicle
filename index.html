@@ -1391,7 +1391,7 @@ svg {
    RESPONSIVE
 ===================================================== */
 
-@media (max-width: 0px) {
+@media(max-width:650px) {
 
     .archive {
 
@@ -1442,7 +1442,7 @@ svg {
 }
 
 
-@media (max-width: 0px) {
+@media(max-width:650px) {
     .month-tabs {
         width: min(100%, 94vw);
         gap: 4px;
@@ -1501,7 +1501,7 @@ svg {
 
 /* MOBILE */
 
-@media (max-width: 0px) {
+@media (max-width: 650px) {
     .typewriter-description {
         top: 42px;
         left: 18px;
@@ -1608,51 +1608,6 @@ svg {
 .se-danger {
     border-color: rgba(255, 98, 92, 0.45);
     color: #ff9d8f;
-}
-
-
-/* =====================================================
-   FIT-TO-FRAME  (skala proporsional seperti Shift+resize di Photoshop)
-   Halaman didesain di kanvas tetap 1148px lebar, lalu seluruh kanvas
-   diskalakan agar muat di frame (Notion embed) tanpa scroll bar.
-===================================================== */
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-}
-
-body { position: relative; }
-
-.archive {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 1148px;          /* 1100px konten + padding 24px kiri-kanan */
-    min-height: 0;
-    transform-origin: center center;
-    transform: translate(-50%, -50%) scale(var(--fit-scale, 1));
-    will-change: transform;
-}
-
-/* semua lebar yang tadinya mengikuti viewport (vw) dikunci */
-.month-tabs,
-.map-container,
-.editor-panel,
-.guide-controls {
-    width: 1100px;
-}
-
-h1 { font-size: 58px; }
-
-/* kartu profil hover ikut diskalakan */
-.star-profile {
-    transform-origin: top left;
-    transform: translateY(8px) scale(var(--fit-scale, 1));
-}
-.star-profile.active {
-    transform: translateY(0) scale(var(--fit-scale, 1));
 }
 
 </style>
@@ -3320,13 +3275,13 @@ function positionProfileCard(
 
 
     const cardWidth =
-        (profileCard.offsetWidth || 270) *
-        (window.__fitScale || 1);
+        profileCard.offsetWidth ||
+        270;
 
 
     const cardHeight =
-        (profileCard.offsetHeight || 150) *
-        (window.__fitScale || 1);
+        profileCard.offsetHeight ||
+        150;
 
 
     if (
@@ -5009,47 +4964,6 @@ restoreDraft();
 ===================================================== */
 
 updateCycle();
-
-
-/* =====================================================
-   FIT TO FRAME — skala proporsional, isi tidak berubah
-===================================================== */
-
-(function () {
-
-    const stage = document.querySelector(".archive");
-    const root  = document.documentElement;
-
-    function fit() {
-
-        const w = stage.offsetWidth;
-        const h = stage.offsetHeight;
-
-        if (!w || !h) return;
-
-        const scale = Math.min(
-            window.innerWidth  / w,
-            window.innerHeight / h
-        );
-
-        window.__fitScale = scale;
-        root.style.setProperty("--fit-scale", scale);
-    }
-
-    window.addEventListener("resize", fit);
-
-    if (window.ResizeObserver) {
-        new ResizeObserver(fit).observe(stage);
-    }
-
-    fit();
-
-    // font Google/lokal selesai dimuat -> tinggi bisa berubah sedikit
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(fit);
-    }
-
-})();
 
 </script>
 
