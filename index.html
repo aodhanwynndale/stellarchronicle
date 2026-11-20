@@ -1624,6 +1624,17 @@ svg {
   .month-display p{font-size:7px;}
   .archive{padding:14px 10px 14px;}
 }
+
+@media(min-width:651px) and (max-height:720px){
+  header{padding-top:0;}
+  h1{font-size:30px;letter-spacing:5px;margin:2px 0 2px;}
+  .kicker{display:none;}
+  .subtitle{font-size:11px;}
+  .cycle-title strong{font-size:15px;}
+  .month-display{margin-bottom:4px;}
+  .month-display h2{font-size:18px;letter-spacing:4px;}
+  .archive{padding:8px 24px 10px;}
+}
 </style>
 
 </head>
@@ -4992,7 +5003,7 @@ updateCycle();
     root.style.removeProperty('--map-w');
     var full=mc.offsetWidth,chrome=ar.offsetHeight-mc.offsetHeight;
     var wFit=(window.innerHeight-chrome-6)*16/9;
-    if(wFit<full&&wFit>=260)root.style.setProperty('--map-w',Math.floor(wFit)+'px');
+    var t=Math.max(wFit,full*0.6,260);if(t<full)root.style.setProperty('--map-w',Math.floor(t)+'px');
   }
   window.addEventListener('resize',fit);
   window.addEventListener('load',fit);
