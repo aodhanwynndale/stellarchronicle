@@ -108,8 +108,7 @@ body::before {
 
 .archive {
 
-    min-height:
-        100vh;
+    min-height: 0;
 
     padding:
         28px 24px 35px;
@@ -1610,6 +1609,21 @@ svg {
     color: #ff9d8f;
 }
 
+
+/* ===== FIT FIX: tanpa ruang kosong, pas di embed Notion ===== */
+.map-container{width:var(--map-w,min(1100px,94vw));}
+@media(max-width:650px){
+  header{padding-top:2px;}
+  h1{font-size:clamp(22px,7vw,30px);letter-spacing:4px;margin:6px 0 4px;}
+  .kicker{font-size:8px;letter-spacing:3px;}
+  .subtitle{font-size:11px;}
+  .cycle-title strong{font-size:15px;letter-spacing:3px;}
+  .cycle-title span{font-size:8px;margin-top:2px;}
+  .month-display{margin-bottom:6px;}
+  .month-display h2{font-size:20px;letter-spacing:4px;}
+  .month-display p{font-size:7px;}
+  .archive{padding:14px 10px 14px;}
+}
 </style>
 
 </head>
@@ -4967,6 +4981,25 @@ updateCycle();
 
 </script>
 
+
+<script>
+/* Menyesuaikan tinggi peta dengan tinggi jendela/embed (dilewati saat mode edit) */
+(function(){
+  if(/[?&]edit=true/.test(location.search))return;
+  var mc=document.querySelector('.map-container'),ar=document.querySelector('.archive'),root=document.documentElement;
+  if(!mc||!ar)return;
+  function fit(){
+    root.style.removeProperty('--map-w');
+    var full=mc.offsetWidth,chrome=ar.offsetHeight-mc.offsetHeight;
+    var wFit=(window.innerHeight-chrome-6)*16/9;
+    if(wFit<full&&wFit>=260)root.style.setProperty('--map-w',Math.floor(wFit)+'px');
+  }
+  window.addEventListener('resize',fit);
+  window.addEventListener('load',fit);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+  setTimeout(fit,300);setTimeout(fit,1200);
+})();
+</script>
 </body>
 
 </html>
